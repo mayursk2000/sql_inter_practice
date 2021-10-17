@@ -1,0 +1,18 @@
+-- Select name fields (with alias) and region 
+SELECT cities.name as city,countries.name as country,region
+FROM cities
+  INNER JOIN countries
+    ON cities.country_code = countries.code;
+    
+    
+    
+    -- Select fields with aliases
+SELECT c.code AS country_code, name, year, inflation_rate
+FROM countries AS c
+  -- Join to economies (alias e)
+  INNER JOIN economies as e
+    -- Match on code
+    ON c.code = e.code;
+    
+    
+    
