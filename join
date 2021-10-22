@@ -189,3 +189,61 @@ ORDER BY region;
     
     
     
+    SELECT countries.name, code, languages.name AS language
+-- From languages
+FROM languages
+  -- Join to countries
+  full JOIN countries
+    -- Match on code
+    USING (code)
+-- Where countries.name starts with V or is null
+WHERE countries.name LIKE 'V%' OR countries.name IS null
+-- Order by ascending countries.name
+ORDER BY countries.name;
+
+
+-- Select fields (with aliases)
+SELECT c1.name AS country, region, l.name AS language,
+       basic_unit, frac_unit
+-- From countries (alias as c1)
+FROM countries AS c1
+  -- Join with languages (alias as l)
+  FULL JOIN languages AS l
+    -- Match on code
+    USING (code)
+  -- Join with currencies (alias as c2)
+  FULL JOIN currencies AS c2
+    -- Match on code
+    USING (code)
+-- Where region like Melanesia and Micronesia
+WHERE region LIKE 'M%esia';
+
+
+-- Select fields
+SELECT c.name AS city, l.name AS language
+-- From cities (alias as c)
+FROM cities AS c        
+  -- Join to languages (alias as l)
+  CROSS JOIN languages AS l
+-- Where c.name like Hyderabad
+WHERE c.name LIKE 'Hyderabad';
+
+-- Select fields
+select c.name as country,region, life_expectancy as life_exp
+-- From countries (alias as c)
+from countries as c
+  -- Join to populations (alias as p)
+  left join populations as p
+    -- Match on country code
+    on c.code = p.country_code
+-- Focus on 2010
+where year = 2010
+-- Order by life_exp
+order by life_exp 
+-- Limit to 5 records
+Limit 5;
+
+
+
+    
+    
